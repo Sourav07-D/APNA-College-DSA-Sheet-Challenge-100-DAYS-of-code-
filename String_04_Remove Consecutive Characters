@@ -1,0 +1,21 @@
+
+
+//User function Template for Java
+
+class Solution{
+    public String removeConsecutiveCharacter(String s1){
+        String res="";
+        int n= s1.length();
+        for (int i=0;i<n;i++)
+        {
+            if(i<n-1 && s1.charAt(i)== s1.charAt(i+1))
+            {
+                continue;
+            }else
+            {
+                res+=s1.charAt(i);
+            }
+        }
+        return res;
+    }
+}
