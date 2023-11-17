@@ -1,0 +1,34 @@
+       ArrayList<String> arr=new ArrayList<>();
+        
+        
+        subsq(str,"",0,arr);
+        long cnt=0;
+        
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i)!="" && isPalindrome(arr.get(i),0,arr.get(i).length()-1)==true)
+            cnt++;
+        }
+        return cnt;
+        
+        
+    }
+    
+    void subsq(String res,String curr,int i,ArrayList<String> arr){
+        if(i==res.length()){
+            arr.add(curr);
+            return;
+        }
+        subsq(res,curr+res.charAt(i),i+1,arr);
+        subsq(res,curr,i+1,arr);
+    }
+    static boolean isPalindrome(String res,int low,int high){
+        char ch[]=res.toCharArray();
+        while(low<=high){
+            if(ch[low]!=ch[high])
+            return false;
+            
+            low++;
+            high--;
+        }
+        return true;
+    }
