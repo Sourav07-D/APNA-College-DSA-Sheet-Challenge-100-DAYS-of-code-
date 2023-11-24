@@ -1,0 +1,38 @@
+
+
+//User function Template for Java
+
+class Solution
+{
+    ArrayList<Integer> commonElements(int a[], int b[], int c[], int n1, int n2, int n3) 
+    {
+        // code here 
+         int i=0,j=0,k=0;
+         HashSet<Integer> set =new HashSet<>();
+        ArrayList<Integer> res=new ArrayList<>();
+        while (i<n1 && j<n2 && k<n3)
+        {
+            if(a[i]==b[j] && b[j]==c[k])
+            {
+                if(set.add(a[i]))
+                {
+                res.add(a[i]);
+                }
+                i++;
+                j++;
+                k++;
+            } else if (a[i]<b[j]) {
+                i++;
+
+            } else if (b[j]<c[k]) {
+               j++;
+            }else
+            {
+                k++;
+            }
+          
+        }
+       return res;
+
+    }
+}
