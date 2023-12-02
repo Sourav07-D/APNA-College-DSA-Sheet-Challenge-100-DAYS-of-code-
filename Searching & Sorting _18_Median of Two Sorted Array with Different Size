@@ -1,0 +1,18 @@
+
+
+//User function Template for Java
+
+class GFG 
+{ 
+    static double medianOfArrays(int n, int m, int a[], int b[]) 
+    {
+       int merged[] = new int[n+m];
+        
+        System.arraycopy(a ,0 ,merged ,0 , n);
+        System.arraycopy(b, 0 , merged ,n, m);
+        Arrays.sort(merged);
+        
+         int mid = (n+m)/2;
+         return (n+m)%2 == 0 ? (merged[mid -1] + merged[mid])/2.0 : merged[mid];
+    }
+}
