@@ -1,0 +1,39 @@
+
+
+
+ 
+class Solution
+{
+     public  void swap(int[] b,int i,int j)
+    {
+        int temp=b[i];
+        b[i]=b[j];
+        b[j]=temp;
+    }
+    public int minSwaps(int arr[])
+    {
+       
+        int[] b=new int[arr.length];
+        for(int i=0;i<arr.length;i++)
+        {
+            b[i]=arr[i];
+        }
+        Arrays.sort(arr);
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<arr.length;i++)
+        {
+            map.put(arr[i],i);
+        }
+        int count=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            while(map.get(b[i])!=i)
+            {
+                swap(b,i,map.get(b[i]));
+                count++;
+            }
+        }
+        return count;
+    }
+    
+}
