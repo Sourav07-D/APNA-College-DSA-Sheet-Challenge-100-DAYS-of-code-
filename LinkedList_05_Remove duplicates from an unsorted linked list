@@ -1,0 +1,19 @@
+ public Node removeDuplicates(Node head) 
+    {
+        HashMap<Integer,Boolean> map = new HashMap<>();
+         Node curr = head;
+         map.put(curr.data,true);
+         while(curr != null && curr.next != null)
+         {
+             if(!map.containsKey(curr.next.data))
+             {
+                 map.put(curr.next.data,true);
+                 curr = curr.next;
+             }
+             else
+             {
+                 curr.next = curr.next.next;
+             }
+         }
+         return head;
+    }
