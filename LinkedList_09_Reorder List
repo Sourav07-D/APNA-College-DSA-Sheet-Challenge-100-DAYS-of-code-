@@ -1,0 +1,46 @@
+class Solution {
+    public void reorderList(ListNode head) {
+        ListNode mid = getMid(head);
+            
+        ListNode list1 = head;
+        ListNode list2 = reverseList(mid.next);
+        mid.next = null;
+        
+        while(list2 != null) {
+            ListNode temp1 = list1.next, temp2 = list2.next;
+            list1.next = list2;
+            list2.next = temp1;
+            
+            list1 = temp1;
+            list2 = temp2;
+        }
+    }
+    
+    private ListNode getMid(ListNode head) {
+        ListNode slow = head, fast = head;
+        
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        
+        return slow;
+    }
+    
+    private ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) return head;
+        
+        ListNode prev = head;
+        ListNode curr = head.next;
+        
+        while(curr != null) {
+            prev.next = curr.next;
+            curr.next = head;
+            
+            head = curr;
+            curr = prev.next;
+        }
+        
+        return head;
+    }
+}
