@@ -1,0 +1,66 @@
+public static Node getTail(Node head) {
+        
+        Node temp = head;
+        while(temp.next != null) {
+            temp = temp.next;
+        }
+
+        return temp;
+    }
+    public static Node[] partition(Node head) {
+        Node pivot = head;
+        Node temp = head.next;
+        pivot.next = null;
+        
+        
+        Node leftHead = null, leftTail = null;
+        Node rightHead = null, rightTail = null;
+        
+        // partition
+        while(temp != null) {
+            Node shift = temp.next;
+            temp.next = null;
+            
+            if(pivot.data >= temp.data) {
+                if(leftHead == null) {
+                    leftHead = leftTail = temp;
+                } else {
+                    leftTail.next = temp;
+                    leftTail = leftTail.next;
+                }
+            } else {
+                if(rightHead == null) {
+                    rightHead = rightTail = temp;
+                } else {
+                    rightTail.next = temp;
+                    rightTail = rightTail.next;
+                }
+            }
+            
+            temp = shift;
+        }
+
+        Node[] part = {leftHead, pivot, rightHead};
+        return part;
+    }
+    
+    public static Node quickSort(Node head)
+    {
+        if(head == null || head.next == null) return head;
+        
+        Node[] part = partition(head);
+        Node leftHead = part[0];
+        Node pivot = part[1];
+        Node rightHead = part[2];
+        
+        // recursive call of both side
+        Node lhead = quickSort(leftHead);
+        Node rhead = quickSort(rightHead);
+        
+        pivot.next = rhead;
+        if(lhead == null) return pivot;
+        Node tail = getTail(lhead);
+        
+        tail.next = pivot;
+        return lhead;
+    }
