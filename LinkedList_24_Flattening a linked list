@@ -1,0 +1,43 @@
+Node flatten(Node root)
+    {
+        // dummy node for easy operations
+	    Node dummy = new Node(0);
+	    
+	    // flatten the list (without sorting)
+        // by iterating each node (just like 2D array)
+	    Node curr = dummy;
+	    
+	    Node right = root;
+	    Node down = root;
+	    
+	    while(right!=null){
+	        down = right;
+	        while(down!=null){
+	            Node n = new Node(down.data);
+	            curr.bottom = n;
+	            curr = curr.bottom;
+	            down = down.bottom;
+	        }
+	        right = right.next;
+	    }
+	    
+	    // insert each data of node of flatten list into list 
+	    Node temp = dummy.bottom;
+	    List<Integer> arr = new ArrayList<>();
+	    while(temp!=null){
+	        arr.add(temp.data);
+	        temp = temp.bottom;
+	    }
+	    
+        //sort the list
+	    Collections.sort(arr);
+	    
+        // assignthe sorted data elements
+	    temp = dummy.bottom;
+	    int i = 0;
+	    while(temp!=null){
+	        temp.data = arr.get(i++);
+	        temp = temp.bottom;
+	    }
+	    return dummy.bottom;
+    }
