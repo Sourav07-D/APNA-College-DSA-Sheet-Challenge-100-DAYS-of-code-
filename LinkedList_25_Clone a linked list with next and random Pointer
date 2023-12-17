@@ -1,0 +1,50 @@
+ //Step 1 Create a duplicate of each node infront of it 
+  //Step 2 copy the arb references from original nodes to duplicate nodes
+  //o -> original nodes d -> duplicate nodes
+  //Step 3 seperate the LL into 2 original and clone
+
+class Clone {
+    //Function to clone a linked list with next and arb pointer.
+    Node copyList(Node head) {
+        // your code here
+        
+        
+        //Step 1 Create a duplicate of each node infront of it 
+        Node n,d,c;
+        for(Node t = head; t!= null; t = t.next)
+        {
+            n = t.next;
+            t.next = new Node(t.data);
+            t = t.next;
+            t.next = n;
+        }
+        
+        //Step 2 copy the arb references from original nodes to duplicate nodes
+        //o -> original nodes d -> duplicate nodes
+        
+        for(Node o = head; o!= null; o = d.next)
+        {
+            d = o.next;
+            if(o.arb != null)
+            d.arb = o.arb.next;
+        }
+        
+        //Step 3 seperate the LL into 2 original and clone
+    
+        c = head.next;  //clone list head
+        
+        for(Node o = head; o!= null; o = o.next)
+        {
+            d = o.next;
+            o.next = d.next;
+            if(o.next == null)
+            break;
+            d.next = o.next.next;
+        }
+        
+        
+        return c;
+    }
+}
+
+ 
