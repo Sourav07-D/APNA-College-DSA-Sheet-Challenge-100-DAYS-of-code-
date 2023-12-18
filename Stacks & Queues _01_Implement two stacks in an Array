@@ -1,0 +1,60 @@
+
+
+
+class twoStacks
+{
+    int arr[];
+    int size;
+    int tos1, tos2;
+    twoStacks()
+    {
+        size = 100; 
+        arr = new int[100]; 
+        tos1 = -1; 
+        tos2 = size;
+    }
+    //Function to push an integer into the stack1.
+    void push1(int x)
+    {
+     if(tos2==tos1+1)
+     {
+         System.out.println("Stack Overflow");
+     }
+     tos1++;
+     arr[tos1]=x;
+    }
+    //Function to push an integer into the stack2.
+    void push2(int x)
+    {
+       if(tos2==tos1+1)
+     {
+         System.out.println("Stack Overflow");
+     }
+     tos2--;
+     arr[tos2]=x;
+    }
+    //Function to remove an element from top of the stack1.
+    int pop1()
+    {
+        if(tos1+1==0)
+       {
+         //   System.out.println("Stack Underflow");
+           return -1;
+       }
+       int val=arr[tos1];
+       tos1--;
+       return val;
+    }
+    //Function to remove an element from top of the stack2.
+    int pop2()
+    {
+       if(arr.length-tos2==0)
+       {
+         //   System.out.println("Stack Underflow");
+           return -1;
+       }
+       int val=arr[tos2];
+       tos2++;
+       return val;
+    }
+}
