@@ -1,0 +1,25 @@
+
+
+//User function Template for Java
+
+
+class Solution {
+    
+    public static long minSum(int arr[], int n)
+    {
+       Arrays.sort(arr);
+       long evensum=0;
+       long oddsum=0;
+       for(int i=0;i<n;i++)
+       {
+           if(i%2==0)
+           {
+               evensum=evensum*10+arr[i];
+           }else
+           {
+               oddsum=oddsum*10+arr[i];
+           }
+       }
+       return evensum+oddsum;
+    }
+}
