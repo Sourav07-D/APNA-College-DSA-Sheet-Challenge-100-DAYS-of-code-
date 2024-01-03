@@ -1,0 +1,42 @@
+
+
+class Solution {
+   public static int calSum(int[] arr) {
+        int sum = 0;
+        for(int el : arr) {
+            sum += el;
+        }
+        return sum;
+    }
+    
+    public static int maxEqualSum(int N1,int N2,int N3, int[] S1, int[] S2, int[] S3) {
+        int i=0, j=0, k=0;
+        int sum1 = calSum(S1);
+        int sum2 = calSum(S2);
+        int sum3 = calSum(S3);
+        
+        int maxSum; 
+        
+        while(i<N1 && j<N2 && k<N3) {
+            if(sum1 == sum2 && sum2 == sum3) {
+                return sum1;
+            }
+            
+            maxSum = Math.max(sum1, Math.max(sum2, sum3));
+            
+            if(sum1 == maxSum) {
+                sum1 = sum1-S1[i];
+                i++;
+            } else if(sum2 == maxSum) {
+                sum2 = sum2-S2[j];
+                j++;
+            } else {
+                sum3 = sum3-S3[k];
+                k++;
+            } 
+        }
+
+        return 0;
+    }
+}
+        
