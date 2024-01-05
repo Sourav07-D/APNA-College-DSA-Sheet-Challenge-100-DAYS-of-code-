@@ -1,0 +1,34 @@
+
+
+/*
+class Pair
+{
+    int x;
+    int y;
+    
+    public Pair(int a, int b)
+    {
+        x = a;
+        y = b;
+    }
+}
+*/
+
+class GfG
+{
+    int maxChainLength(Pair arr[], int n)
+    {
+        Arrays.sort(arr,(a,b) -> a.y-b.y);
+       int currend=arr[0].y;
+       int count=1;
+       for(int i=1;i<n;i++)
+       {
+           if(arr[i].x>currend)
+           {
+               count++;
+               currend=arr[i].y;
+           }
+       }
+       return count;
+    }
+}
