@@ -1,0 +1,50 @@
+package Aj_Java;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class GreedyAlgo_07_ChocolaProblem {
+    public static void main(String[] args) {
+        int n=4, m=6;
+        Integer costver[]={2,1,3,1,4};//m-1
+        Integer costhor[]={4,1,2};//n-1
+        Arrays.sort(costhor,Collections.reverseOrder());
+        System.out.println(Arrays.toString(costhor));
+        Arrays.sort(costver,Collections.reverseOrder());
+        System.out.println(Arrays.toString(costver));
+        int v=0,h=0;
+        int hp=1,vp=1;
+        int cost=0;
+        while (h<costhor.length && v<costver.length )
+        {
+            if(costver[v]<=costhor[h])
+            {
+                cost+=(costhor[h]*vp);
+                hp++;
+                h++;
+            }
+            else
+            {
+                cost+=(costver[v]*hp);
+                vp++;
+                v++;
+            }
+        }
+        while (h<costhor.length)
+        {
+            cost+=(costhor[h]*vp);
+            hp++;
+            h++;
+        }
+        while (v<costver.length)
+        {
+            cost+=(costver[v]*hp);
+            vp++;
+            v++;
+        }
+
+        System.out.println("min price to cut "+cost);
+    }
+}
