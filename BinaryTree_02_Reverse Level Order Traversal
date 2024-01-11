@@ -1,0 +1,48 @@
+
+
+
+/* 
+class Node
+{
+    int data;
+    Node left, right;
+
+    Node(int item)
+    {
+        data = item;
+        left = right = null;
+    }
+}
+*/
+
+class Tree
+{
+    public ArrayList<Integer> reverseLevelOrder(Node node) 
+    {
+        Stack<Integer> st=new Stack<>();
+        Queue<Node> q=new LinkedList<>();
+         q.add(node);
+         while(!q.isEmpty())
+         {
+             Node curr=q.remove();
+             st.push(curr.data);
+              
+              if(curr.right!=null)
+              {
+                  q.add(curr.right);
+              }
+              if(curr.left!=null)
+              {
+                  q.add(curr.left);
+                 
+              }
+         }
+         
+         ArrayList<Integer>ans=new ArrayList<>();
+         while(!st.isEmpty())
+         {
+             ans.add(st.pop());
+         }
+         return ans;
+    }
+}      
