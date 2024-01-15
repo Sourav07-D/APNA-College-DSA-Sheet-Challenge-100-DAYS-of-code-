@@ -1,0 +1,46 @@
+
+
+//User function Template for Java
+
+/* A Binary Tree node
+class Node
+{
+    int data;
+    Node left, right;
+
+    Node(int item)
+    {
+        data = item;
+        left = right = null;
+    }
+}
+*/
+
+class Solution
+{
+	HashSet<Integer> set=new HashSet<>();
+    void leafheight(Node root, int height)
+    {
+    
+        if(root==null)
+        {
+            return;
+        }
+        if(root.left==null && root.right==null)
+        {
+           set.add(height); 
+          return; 
+        }
+        leafheight(root.left,height+1);
+        leafheight(root.right,height+1);
+        
+    }
+    boolean check(Node root)
+    {
+	leafheight(root,0);
+	if(set.size()==1){
+      return true;
+  }
+  return false;
+    }
+}
