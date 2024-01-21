@@ -1,0 +1,77 @@
+
+
+//User function Template for Java
+
+// class Node  
+// { 
+//     int data; 
+//     Node left, right; 
+   
+//     public Node(int d)  
+//     { 
+//         data = d; 
+//         left = right = null; 
+//     } 
+// }
+
+class Solution
+{
+    public static void leftview(Node root,ArrayList<Integer> ans){
+     if(root==null || (root.left==null && root.right==null))  
+	 {
+	     return;
+	 }
+	 ans.add(root.data);
+	 if(root.left!=null)
+	 {
+	   leftview(root.left,ans);  
+	 }else
+	 {
+	     leftview(root.right,ans);
+	 }
+    }
+     public static void leafTraversal(Node root, ArrayList<Integer> ans){
+         if(root==null)
+         {
+             return;
+         }
+         if(root.left==null && root.right==null)
+         {
+             ans.add(root.data);
+             return;
+         }
+         leafTraversal(root.left,ans);
+         leafTraversal(root.right,ans);
+     }
+      public static void rightTraversal(Node root,ArrayList<Integer> ans){
+          if(root==null || (root.left==null && root.right==null))
+          {
+              return;
+          }
+          
+          
+          if(root.right!=null)
+          {
+             rightTraversal(root.right,ans); 
+          }else if(root.left!=null)
+          {
+              rightTraversal(root.left,ans);
+          }
+          ans.add(root.data);
+          return;
+      }
+	ArrayList <Integer> boundary(Node root)
+	{
+	ArrayList<Integer> ans=new ArrayList<>();
+    if(root==null){
+        return ans;
+    }
+    
+    ans.add(root.data);
+    leftview(root.left,ans);
+    leafTraversal(root.left,ans);
+    leafTraversal(root.right,ans);
+    rightTraversal(root.right,ans);
+    return ans;
+	}
+}
