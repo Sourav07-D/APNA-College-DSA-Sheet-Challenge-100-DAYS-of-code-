@@ -1,0 +1,62 @@
+
+
+//User function Template for Java
+
+/*
+class Node {
+    int data;
+    Node left, right,next;
+    
+    public Node(int data){
+        this.data = data;
+    }
+}
+*/
+class Solution{
+    //Approach 1
+    static Node prev=null;
+    void helper(Node root)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        helper(root.left);
+        if(prev==null)
+        {
+               prev=root;
+           
+        }else
+        {
+             prev.next=root;
+             prev=prev.next;
+        }
+     
+        helper(root.right);
+    }
+    
+      //Approach 2
+      void inorder(Node root,ArrayList<Node> list)
+      {
+          if(root==null)
+          {
+              return;
+          }
+          inorder(root.left,list);
+          list.add(root);
+          inorder(root.right,list);
+      }
+    public void populateNext(Node root){
+      
+     // helper(root);
+     ArrayList<Node> list=new ArrayList<>();
+     inorder(root,list);
+     for(int i=0;i<list.size()-1;i++)
+     {
+      Node curr=list.get(i);
+      Node next=list.get(i+1);
+      
+      curr.next=next;
+     }
+    }
+}
