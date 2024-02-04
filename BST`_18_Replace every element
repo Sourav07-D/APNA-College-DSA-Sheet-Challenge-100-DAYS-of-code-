@@ -1,0 +1,57 @@
+class Solution {
+    class Node{
+        int val;
+        Node left;
+        Node right;
+        public Node(int value){
+            this.val = value;
+        }
+    }
+    public Node gr = null;
+    
+    public Node insert(int value, Node parent, Node current, boolean isLeft, Node greater){
+        Node n = new Node(value);
+        if(current == null){
+            n = new Node(value);
+            if(isLeft){
+                parent.left = n;
+            }else{
+                parent.right = n;
+            }
+            gr = greater;
+            return n;
+        }
+        
+        if(current.val<=value){
+            n = insert(value, current, current.right, false, greater);
+        }else{
+            n = insert(value, current, current.left, true, current);
+        }
+        
+        return n;
+        
+    }
+    
+    public  ArrayList<Integer> findLeastGreater(int n, int[] arr) {
+        
+        // code here
+        ArrayList<Integer> ans = new ArrayList<>();
+        Node[] nodeAr = new Node[n];
+        Node root = new Node(arr[n-1]);
+         
+        nodeAr[0]  = root;
+        for(int i=n-2; i>=0; i--){
+            Node temp = insert(arr[i], root, root, true, null);
+            nodeAr[i] = gr;
+        }
+        for(int i=0; i<n-1; i++){
+            if(nodeAr[i]==null){
+                ans.add(-1);
+                continue;
+            }
+            ans.add(nodeAr[i].val);
+        }
+        ans.add(-1);
+       return ans;
+    }
+}
