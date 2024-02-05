@@ -1,0 +1,41 @@
+
+
+//User function Template for Java
+
+class Tree
+{
+    public static float findMedian(Node root)
+    {  ArrayList<Integer> a=new ArrayList<>();
+
+        inOrder(root,a);  
+
+        int n=a.size();
+
+        if(n%2==1){     
+
+            n=n/2;
+
+            return (float)(a.get(n));
+
+        }
+
+        n=n/2;            
+
+        int ans=a.get(n)+a.get(n-1);
+
+        return (float)ans/2;
+
+    }
+
+    static void inOrder(Node root,ArrayList<Integer> a){
+
+        if(root==null) return;
+
+        inOrder(root.left,a);
+
+        a.add(root.data);
+
+        inOrder(root.right,a);
+
+    }
+}
