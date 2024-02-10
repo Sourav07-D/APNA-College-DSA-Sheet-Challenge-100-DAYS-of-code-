@@ -1,0 +1,33 @@
+class Solution {
+    int[] printKClosest(int[] arr, int n, int k, int x) {
+       PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> b.key == a.key ? Integer.compare(a.value, b.value) : Integer.compare(b.key, a.key));
+
+         n=arr.length;
+         int[]ans=new int[k];
+        
+        for(int i=0;i<n;i++){
+            if(arr[i]==x)
+            continue;
+            pq.add(new Pair(Math.abs(arr[i]-x),arr[i]));
+            
+            if(pq.size()>k){
+                pq.poll();
+            }
+        }
+        int i=k-1;
+        while(pq.size()>0){
+            ans[i--]=pq.poll().value;
+        }
+        return ans;
+    }
+}
+class Pair{
+    int key;
+    int value;
+    
+    public Pair(int key,int value){
+        this.key=key;
+        this.value=value;
+    }
+}
+
