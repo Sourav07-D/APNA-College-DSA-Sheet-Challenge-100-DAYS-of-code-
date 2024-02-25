@@ -1,0 +1,84 @@
+
+
+/*Complete the function below*/
+
+
+class Solution
+{
+    //Function to return list containing vertices in Topological order.
+    static void topoSortUtil(ArrayList<ArrayList<Integer>> adj,boolean[] vis,int curr,Stack<Integer> st)
+    {
+        vis[curr]=true;
+        
+        for(int i=0;i<adj.get(curr).size();i++)
+        {
+            int dest=adj.get(curr).get(i);
+            if(!vis[dest])
+            {
+              topoSortUtil(adj,vis,dest,st);  
+            }
+        }
+        st.push(curr);
+    }
+    static void calIndegree(ArrayList<ArrayList<Integer>> adj,int[] ind)
+    {
+        for(int i=0;i<adj.size();i++)
+        {
+            for(int j=0;j<adj.get(i).size();j++)
+            {
+                ind[adj.get(i).get(j)]++;
+            }
+        }
+    }
+    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
+    {
+        // boolean[] vis=new boolean[V];
+        // Stack<Integer> st=new Stack<>();
+        // for(int i=0;i<V;i++)
+        // {
+        //     if(!vis[i])
+        //     {
+        //       topoSortUtil(adj,vis,i,st); 
+        //     }
+        // }
+        // int i=0;
+        // int[] arr=new int[V];
+        // while(!st.isEmpty())
+        // {
+        //     arr[i]=st.pop();
+        //     i++;
+        // }
+        // return arr;
+        
+        //sorting using BFS
+       
+        int[] ind=new int[V];
+         int k=0;
+        int[] arr=new int[V];
+        calIndegree(adj,ind);
+        Queue<Integer> q=new LinkedList<>();
+        for(int i=0;i<ind.length;i++)
+        {
+            if(ind[i]==0)
+            {
+                q.add(i);
+            }
+        }
+        while(!q.isEmpty())
+        {
+            int curr=q.remove();
+            arr[k]=curr;
+            k++;
+            for(int i=0;i<adj.get(curr).size();i++)
+            {
+                int dest=adj.get(curr).get(i);
+                ind[dest]--;
+                if(ind[dest]==0)
+                {
+                    q.add(dest);
+                }
+            }
+        }
+        return arr;
+    }
+}
