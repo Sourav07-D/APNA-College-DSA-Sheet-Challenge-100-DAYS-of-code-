@@ -1,0 +1,27 @@
+ static int longestSubsequence(int n, int a[])
+    {
+        // code here
+        int dp[][]=new int[n+1][n+1];
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=n;j++){
+                dp[i][j]=-1;
+            }
+        }
+        return solve(n,n,a,dp);
+        
+        
+        
+    }
+    public static int solve(int n,int m,int[]arr,int[][]dp){
+        if(n==0 || m==0) return 0;
+        if(dp[n][m]!=-1){
+            return dp[n][m];
+        }
+        int diff=Math.abs(arr[n-1]-arr[m-1]);
+        if(diff==1 && n!=m){
+            return dp[n][m]=1+solve(n-1,m-1,arr,dp);
+        }
+        else{
+            return dp[n][m]=Math.max(solve(n-1,m,arr,dp),solve(n,m-1,arr,dp));
+        }
+    }
