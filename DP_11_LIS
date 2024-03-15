@@ -1,0 +1,36 @@
+class Solution {
+    public int LCS(int[] arr,int[] nums)
+    {
+      int[][] dp=new int[arr.length+1][nums.length+1];
+      for(int i=1;i<dp.length;i++)
+      {
+          for(int j=1;j<dp[0].length;j++)
+          {
+              if(arr[i-1]==nums[j-1])
+              {
+                  dp[i][j]=1+dp[i-1][j-1];
+              }else
+              {
+                 dp[i][j]=Math.max(dp[i-1][j],dp[i][j-1]);
+              }
+          }
+      }
+      return dp[arr.length][nums.length];
+    }
+    public int lengthOfLIS(int[] nums) {
+     HashSet<Integer> set=new HashSet<>();
+      for(int i=0;i<nums.length;i++)
+      {
+          set.add(nums[i]);
+      }
+      int[] arr=new int[set.size()];
+      int k=0;
+       for(int val:set)
+       {
+         arr[k]=val;
+         k++;
+       }
+       Arrays.sort(arr);
+       return LCS(arr,nums);
+    }
+}
