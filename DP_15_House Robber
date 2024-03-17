@@ -1,0 +1,16 @@
+class Solution {
+    public int rob(int[] nums) {
+      
+        int[] dp=new int[nums.length];
+        dp[0]=nums[0];
+        dp[1]=Math.max(nums[0],nums[1]);
+
+        for(int i=2;i<dp.length;i++)
+        {
+            int inc=dp[i-2]+nums[i];
+            int exc=dp[i-1];
+            dp[i]=Math.max(inc,exc);
+        }
+        return dp[nums.length-1];
+    }
+}
