@@ -1,0 +1,58 @@
+
+
+class Solution 
+{ 
+    static int KnapsackMemo(int W, int wt[], int val[], int n,int[][] dp)
+    {
+        if(n==0 || W==0)
+        {
+            return 0;
+        }
+        
+        if(dp[n][W]!=-1)
+        {
+            return dp[n][W];
+            
+        }
+        
+        if(wt[n-1]<=W)
+        {
+            int inc=val[n-1]+KnapsackMemo(W-wt[n-1],wt,val,n-1,dp);
+            int exc=KnapsackMemo(W,wt,val,n-1,dp);
+            dp[n][W]=Math.max(inc,exc);
+        }else
+        {
+              dp[n][W]=KnapsackMemo(W,wt,val,n-1,dp);
+        }
+        return dp[n][W];
+    }
+    //Function to return max value that can be put in knapsack of capacity W.
+    static int knapSack(int W, int wt[], int val[], int n) 
+    { 
+        
+         int[][] dp=new int[n+1][W+1];
+        //  for(int i=0;i<dp.length;i++)
+        //  {
+        //      Arrays.fill(dp[i],-1);
+        //  }
+        //  return KnapsackMemo(W,wt,val,n,dp);
+        
+        for(int i=1;i<n+1;i++)
+        {
+            for(int j=1;j<W+1;j++)
+            {
+                int value=val[i-1];
+                if(wt[i-1]<=j)
+                {
+                    int inc=value+dp[i-1][j-wt[i-1]];
+                    int exc=dp[i-1][j];
+                    dp[i][j]=Math.max(inc,exc);
+                }else
+                {
+                    dp[i][j]=dp[i-1][j];
+                }
+            }
+        }
+        return dp[n][W];
+    } 
+}
