@@ -1,0 +1,71 @@
+// java code to implement the approach
+
+import java.util.*;
+
+class GFG {
+static int[] dx
+	= new int[] { -1, 0, 1 }; // used to traverse grid
+static int[] dy
+	= new int[] { -1, -1, -1 }; // used to traverse grid
+
+// method to check if given point is valid or not
+static boolean isValid(int x, int y, int n, int m)
+{
+	if (x >= 0 && x < n && y >= 0 && y < m)
+	return true;
+	return false;
+}
+
+// method to find the max amount of gold that can be
+// collected
+static int maxGold(int n, int m, int[][] M)
+{
+	int[][] dp = new int[n][m];
+
+	// initialisation of first col
+	for (int i = 0; i < n; i++)
+	dp[i][0] = M[i][0];
+
+	// Dynamic programming
+	for (int j = 1; j < m; j++) {
+	for (int i = 0; i < n; i++) {
+		int mx = Integer.MIN_VALUE;
+		for (int k = 0; k < 3; k++) {
+		int x = i + dx[k];
+		int y = j + dy[k];
+
+		if (isValid(x, y, n, m))
+			mx = Math.max(mx,
+						dp[x][y] + M[i][j]);
+		}
+		dp[i][j] = mx;
+	}
+	}
+
+	int ans = Integer.MIN_VALUE;
+
+	// find max value from last column of dp table
+	for (int i = 0; i < n; i++) {
+	ans = Math.max(ans, dp[i][m - 1]);
+	}
+	return ans;
+}
+
+// Driver code
+public static void main(String[] args)
+{
+	int n = 4;
+	int m = 4;
+
+	int[][] gold = new int[][] { { 1, 3, 1, 5 },
+								{ 2, 2, 4, 1 },
+								{ 5, 0, 2, 3 },
+								{ 0, 6, 1, 2 } };
+
+	// Function call
+	System.out.println("Max Amount of gold collected = "
+					+ maxGold(n, m, gold));
+}
+}
+
+// This code is contributed by phasing17.
