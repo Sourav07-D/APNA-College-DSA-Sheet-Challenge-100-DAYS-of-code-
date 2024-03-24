@@ -1,0 +1,13 @@
+int eggDrop(int n, int k) 
+    {
+        // your code here
+        vector<int> dp(n+1, 0);
+        int attempts = 0;
+        while(dp[n]<k){
+            attempts++;
+            for(int eggs=n; eggs>0; eggs--){
+                dp[eggs] += 1 + dp[eggs-1];
+            }
+        }
+        return attempts;
+    }
