@@ -1,0 +1,25 @@
+
+
+class Solution{
+    static int minJumps(int[] arr){
+        // your code here
+           int boundary=0;
+           int count=0;
+           int step=0;
+    for(int i=0;i<arr.length-1;i++)
+    {
+        boundary=Math.max(boundary,i+arr[i]);
+        
+       if(i==step)
+       {
+           count++;
+           step=boundary;
+       }
+       if(i>=boundary)
+       {
+           return -1;
+       }
+    }
+  return count;
+    }
+}
